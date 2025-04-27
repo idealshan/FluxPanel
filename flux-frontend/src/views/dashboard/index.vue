@@ -1,3 +1,11 @@
+<!--
+ * @Author: idealshan idealshan@gmail.com
+ * @Date: 2025-04-15 08:27:33
+ * @LastEditors: idealshan idealshan@gmail.com
+ * @LastEditTime: 2025-04-27 22:29:32
+ * @FilePath: \flux-frontend\src\views\dashboard\index.vue
+ <!-- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE -->
+-->
 <template>
     <div>
         <div class="pageHeaderContent">
@@ -14,13 +22,13 @@
             </div>
             <div class="extraContent">
                 <div class="statItem">
-                    <a-statistic title="项目数" :value="56" />
+                    <a-statistic title="项目总数" :value="56" />
                 </div>
                 <div class="statItem">
-                    <a-statistic title="团队内排名" :value="8" suffix="/ 24" />
+                    <a-statistic title="团队内排名" :value="4" suffix="/ 14" />
                 </div>
                 <div class="statItem">
-                    <a-statistic title="项目访问" :value="2223" />
+                    <a-statistic title="项目访问人数" :value="5347" />
                 </div>
             </div>
         </div>
@@ -86,7 +94,7 @@
                         :body-style="{ padding: 0 }"
                         :bordered="false"
                         class="activeCard"
-                        title="动态"
+                        title="开发团队最新动态"
                         :loading="false"
                     >
                         <a-list
@@ -150,16 +158,16 @@
                 <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
                     <a-card
                         :style="{ marginBottom: '24px' }"
-                        title="快速开始 / 便捷导航"
+                        title="快速导航"
                         :bordered="false"
                         :body-style="{ padding: 0 }"
                     >
                         <EditableLinkGroup />
-                    </a-card>
+                    </a-card> 
                     <a-card
                         :style="{ marginBottom: '24px' }"
                         :bordered="false"
-                        title="XX 指数"
+                        title="团队成员指数"
                     >
                         <div class="chart">
                             <div ref="radarContainer" />
@@ -171,7 +179,7 @@
                             paddingBottom: '12px'
                         }"
                         :bordered="false"
-                        title="团队"
+                        title="开发团队动态"
                     >
                         <div class="members">
                             <a-row :gutter="48">
@@ -241,12 +249,12 @@ defineOptions({
 
 const currentUser = {
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-    name: '吴彦祖',
+    name: '上善治水',
     userid: '00000001',
     email: 'antdesign@alipay.com',
     signature: '海纳百川，有容乃大',
-    title: '交互专家',
-    group: 'FluxAdmin-技术部'
+    title: '资深专家 ',
+    group: ' 益智-技术部'
 }
 
 const projectNotice = [
@@ -254,9 +262,9 @@ const projectNotice = [
         id: 'xxx1',
         title: 'Alipay',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-        description: '那是一种内在的东西，他们到达不了，也无法触及的',
+        description: '支付宝项目，一个高效的支付系统',
         updatedAt: '几秒前',
-        member: '科学搬砖组',
+        member: '金融项目团队',
         href: '',
         memberLink: ''
     },
@@ -264,9 +272,9 @@ const projectNotice = [
         id: 'xxx2',
         title: 'Angular',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
-        description: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
-        updatedAt: '6 年前',
-        member: '全组都是吴彦祖',
+        description: '前端项目，好东西是不会消亡的',
+        updatedAt: '3天前',
+        member: '前端项目团队',
         href: '',
         memberLink: ''
     },
@@ -274,9 +282,9 @@ const projectNotice = [
         id: 'xxx3',
         title: 'Ant Design',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-        description: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
+        description: '快速开发迭代项目',
         updatedAt: '几秒前',
-        member: '中二少女团',
+        member: '前端项目二组',
         href: '',
         memberLink: ''
     },
@@ -284,9 +292,9 @@ const projectNotice = [
         id: 'xxx4',
         title: 'Ant Design Pro',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
-        description: '那时候我只会想自己想要什么，从不想自己拥有什么',
-        updatedAt: '6 年前',
-        member: '程序员日常',
+        description: '从不想自己拥有什么',
+        updatedAt: '一周前',
+        member: '资深专家组',
         href: '',
         memberLink: ''
     },
@@ -294,9 +302,9 @@ const projectNotice = [
         id: 'xxx5',
         title: 'Bootstrap',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
-        description: '凛冬将至',
-        updatedAt: '6 年前',
-        member: '高逼格设计天团',
+        description: '行业凛冬将至',
+        updatedAt: '二周前',
+        member: '设计天团',
         href: '',
         memberLink: ''
     },
@@ -305,8 +313,8 @@ const projectNotice = [
         title: 'React',
         logo: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png',
         description: '生命就像一盒巧克力，结果往往出人意料',
-        updatedAt: '6 年前',
-        member: '骗你来学计算机',
+        updatedAt: '一个月前',
+        member: '产外包品技术',
         href: '',
         memberLink: ''
     }
@@ -317,15 +325,15 @@ const activities = [
         id: 'trend-1',
         updatedAt: '几秒前',
         user: {
-            name: '曲丽丽',
+            name: '风清扬',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
         },
         group: {
-            name: '高逼格设计天团',
+            name: '资深专家组',
             link: 'http://github.com/'
         },
         project: {
-            name: '六月迭代',
+            name: '拓扑量子材料分析',
             link: 'http://github.com/'
         },
         template1: '在',
@@ -335,15 +343,15 @@ const activities = [
         id: 'trend-2',
         updatedAt: '几秒前',
         user: {
-            name: '付小小',
+            name: '黄药师',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png'
         },
         group: {
-            name: '高逼格设计天团',
+            name: '前端项目团队',
             link: 'http://github.com/'
         },
         project: {
-            name: '六月迭代',
+            name: '前端迭代',
             link: 'http://github.com/'
         },
         template1: '在',
@@ -353,15 +361,15 @@ const activities = [
         id: 'trend-3',
         updatedAt: '几秒前',
         user: {
-            name: '林东东',
+            name: '林渊澈',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png'
         },
         group: {
-            name: '中二少女团',
+            name: '金融项目团队',
             link: 'http://github.com/'
         },
         project: {
-            name: '六月迭代',
+            name: '量子计算与意识拓扑架构',
             link: 'http://github.com/'
         },
         template1: '在',
@@ -371,11 +379,11 @@ const activities = [
         id: 'trend-4',
         updatedAt: '几秒前',
         user: {
-            name: '周星星',
+            name: '索菲娅',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png'
         },
         group: {
-            name: '5 月日常迭代',
+            name: '合成生物学与气候工程',
             link: 'http://github.com/'
         },
         template1: '将',
@@ -385,15 +393,15 @@ const activities = [
         id: 'trend-5',
         updatedAt: '几秒前',
         user: {
-            name: '朱偏右',
+            name: '周慕玄',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png'
         },
         group: {
-            name: '工程效能',
+            name: '前端项目二组',
             link: 'http://github.com/'
         },
         project: {
-            name: '留言',
+            name: '空间推进工程留言',
             link: 'http://github.com/'
         },
         template1: '在',
@@ -403,15 +411,15 @@ const activities = [
         id: 'trend-6',
         updatedAt: '几秒前',
         user: {
-            name: '乐哥',
+            name: '阿乐',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png'
         },
         group: {
-            name: '程序员日常',
+            name: '产外包品技术',
             link: 'http://github.com/'
         },
         project: {
-            name: '品牌迭代',
+            name: '认知考古学与数字人文',
             link: 'http://github.com/'
         },
         template1: '在',
@@ -439,7 +447,7 @@ const radarData = [
     {
         name: '个人',
         label: '贡献',
-        value: 5
+        value: 7
     },
     {
         name: '个人',
