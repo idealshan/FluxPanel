@@ -1,3 +1,11 @@
+<!--
+ * @Author: idealshan idealshan@gmail.com
+ * @Date: 2025-04-27 08:56:29
+ * @LastEditors: idealshan idealshan@gmail.com
+ * @LastEditTime: 2025-04-27 15:44:51
+ * @FilePath: \Flux_ideal_local\flux-panel\README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <p align="center">
 	<img alt="logo" src="https://github.com/user-attachments/assets/9ce3fa2b-7751-4d20-b1e0-601eeb60291d">
 

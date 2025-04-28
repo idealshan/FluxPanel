@@ -1,3 +1,11 @@
+<!--
+ * @Author: idealshan idealshan@gmail.com
+ * @Date: 2025-04-27 08:56:29
+ * @LastEditors: idealshan idealshan@gmail.com
+ * @LastEditTime: 2025-04-27 09:04:21
+ * @FilePath: \Flux_ideal_local\flux-panel\flux-frontend\src\views\dashboard\editable-link-group.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
     <div class="linkGroup">
         <a v-for="(item, index) in links" :key="index" :href="item.href">
@@ -24,27 +32,33 @@ import { PlusOutlined } from '@ant-design/icons-vue'
 
 const links = [
     {
-        title: '操作一',
+        title: '日志',
         href: ''
     },
     {
-        title: '操作二',
+        title: '周报',
         href: ''
     },
     {
-        title: '操作三',
+        title: '紧急',
         href: ''
     },
     {
-        title: '操作四',
+        title: '偏差',
         href: ''
     },
     {
-        title: '操作五',
+        title: '反馈',
         href: ''
     },
     {
-        title: '操作六',
+        title: '跟进',
+        href: ''
+    },{
+        title: '断点',
+        href: ''
+    },{
+        title: '回顾',
         href: ''
     }
 ]
