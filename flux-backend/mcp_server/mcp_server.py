@@ -21,13 +21,14 @@ async def query_weather(city: str) -> str:
     return WeatherTool.format_weather(data)
 
 @mcp.tool()
-async def query_table(table_name: Literal["car_driver", "student_info"]) -> str:
+async def query_table(table_name: Literal["car_driver", "student_info","device"]) -> str:
     """
     输入指定表名，获取表内的数据。
      Args:
         table_name: 表名选项:
             - car_driver: 司机信息
             - student_info: 学生信息表
+            - device: 设备信息表
     return: 数据表内容
     """
     data = await TableTool.fetch_table_data(table_name)
