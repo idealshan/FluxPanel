@@ -13,7 +13,7 @@ class AppSettings(BaseSettings):
     """
 
     app_env: str = 'dev'
-    app_name: str = 'FluxServer'
+    app_name: str = 'Ideal_FluxServer'
     app_root_path: str = '/dev-api'
     app_static_path: str = os.path.join(os.getcwd(), "static/templates")
     app_host: str = '0.0.0.0'
