@@ -12,12 +12,18 @@
             </el-form-item>
 
             <el-form-item label="设备类型" prop="deviceType">
-              <el-input
-                v-model="queryParams.deviceType"
-                placeholder="请输入设备类型"
-                clearable
-                @keyup.enter="handleQuery"
-              />
+              <el-select
+                  v-model="queryParams.deviceType"
+                  placeholder="请选择设备类型"
+                  style="width: 180px"
+                  clearable>
+                <el-option
+                  v-for="dict in device_type_name"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                />
+              </el-select>
             </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -95,6 +101,9 @@
 
 
 
+                    <template #deviceType="{ row }">
+                        <dict-tag :options="device_type_name" :value="row.deviceType"/>
+                    </template>
 
 
 
@@ -133,7 +142,14 @@
                 </el-form-item>
 
                 <el-form-item label="设备类型" prop="deviceType">
-                  <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+                  <el-select v-model="form.deviceType" placeholder="请选择设备类型">
+                    <el-option
+                      v-for="dict in device_type_name"
+                      :key="dict.value"
+                      :label="dict.label"
+                        :value="parseInt(dict.value)"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
 
                 <el-form-item label="生产日期" prop="deviceYears">
@@ -177,6 +193,7 @@ import TableSetup from '@/components/TableSetup'
 import AutoTable from '@/components/AutoTable'
 import ImportData from '@/components/ImportData'
 const { proxy } = getCurrentInstance();
+const { device_type_name } = proxy.useDict('device_type_name');
 
 const deviceList = ref([]);
 const open = ref(false);
@@ -207,7 +224,7 @@ const data = reactive({
         deviceName: [
           { required: true, message: "设备名称不能为空", trigger: "blur" }
         ],        deviceType: [
-          { required: true, message: "设备类型不能为空", trigger: "blur" }
+          { required: true, message: "设备类型不能为空", trigger: "change" }
         ],  }
 });
 
