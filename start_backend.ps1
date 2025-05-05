@@ -10,12 +10,9 @@ Write-Host ""
 
 # Execute conda run to start the python app within the specified environment.
 # The python script path is relative to where this powershell script is located.
-cd D:\Code2025\Flux_ideal_local\flux-panel\flux-backend
+Set-Location -Path 'D:\Code2025\Flux_ideal_local\flux-panel\flux-backend'
 
-conda run -n ideal --no-capture-output --live-stream python .\flux-backend\app.py --env=dev
-
-
-
+conda run -n ideal --no-capture-output --live-stream python .\app.py --env=dev
 
 # The Read-Host might not be reached if the python server runs indefinitely.
 # It's here mainly for cases where the command might fail quickly.
