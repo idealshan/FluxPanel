@@ -14,7 +14,7 @@ class TableTool:
 
     logger = logging.getLogger(__name__)
     # 因为mcp服务是在另外进程里面，需要导入模型，否则Base.registry.mappers是空的
-    support_modules = [CarDriver, StudentInfo]
+    support_modules = [CarDriver, StudentInfo, Device]
 
     @classmethod
     async def fetch_table_data(cls, table_name: str) -> str:
