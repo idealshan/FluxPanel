@@ -22,6 +22,7 @@ from module_admin.controller.sys_form_controller import sysFormController
 from module_admin.controller.sys_form_data_controller import sysFormDataController
 from module_admin.controller.sys_table_controller import sysTableController
 from module_admin.controller.user_controller import userController
+from module_admin.controller.device_controller import deviceController
 from module_app.controller.app_login_controller import appLoginController
 from module_gen.controller.gen_controller import gen1Controller
 from module_website.controller.home_controller import homeRouter
@@ -50,7 +51,8 @@ admin_controllers = [
     {'router': homeRouter, 'tags': ['产品官网']},
     {'router': carDriverController, 'tags': ['测试业务']},
     {'router': studentInfoController, 'tags': ['测试业务']},
-    {'router': importController, 'tags': ['导入数据']}
+    {'router': importController, 'tags': ['导入数据']},
+    {'router': deviceController, 'tags': ['设备管理']}
 
 
 

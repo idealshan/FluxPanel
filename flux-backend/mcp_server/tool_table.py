@@ -8,6 +8,7 @@ import logging
 
 from module_admin.entity.do.car_driver_do import CarDriver
 from module_admin.entity.do.student_info_do import StudentInfo
+from module_admin.entity.do.device_do import Device
 
 class TableTool:
 
