@@ -165,4 +165,5 @@ cython_debug/
 #.idea/
 
 #文件通常是 Redis 数据库的快照持久化文件
-.rdb
+*.rdb
+dump.rdb
