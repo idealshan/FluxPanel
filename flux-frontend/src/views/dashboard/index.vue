@@ -2,7 +2,7 @@
  * @Author: idealshan idealshan@gmail.com
  * @Date: 2025-04-15 08:27:33
  * @LastEditors: idealshan idealshan@gmail.com
- * @LastEditTime: 2025-04-27 22:29:32
+ * @LastEditTime: 2025-05-06 10:12:32
  * @FilePath: \flux-frontend\src\views\dashboard\index.vue
  <!-- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE -->
 -->
@@ -325,7 +325,7 @@ const activities = [
         id: 'trend-1',
         updatedAt: '几秒前',
         user: {
-            name: '风清扬',
+            name: '上善若水',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
         },
         group: {
@@ -411,7 +411,7 @@ const activities = [
         id: 'trend-6',
         updatedAt: '几秒前',
         user: {
-            name: '阿乐',
+            name: '聊空大师',
             avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png'
         },
         group: {

@@ -147,13 +147,16 @@
                       v-for="dict in device_type_name"
                       :key="dict.value"
                       :label="dict.label"
-                        :value="parseInt(dict.value)"
+                      :value="dict.label"
                     ></el-option>
                   </el-select>
                 </el-form-item>
 
                 <el-form-item label="生产日期" prop="deviceYears">
-                  <el-input v-model="form.deviceYears" placeholder="请输入生产日期" />
+                  <!-- <el-input v-model="form.deviceYears" placeholder="请输入生产日期" /> -->
+
+                  <el-date-picker v-model="form.deviceYears" format="YYYY-MM-DD" value-format="YYYY-MM-DD"
+                  :style="{width: '100%'}" placeholder="请选择生产日期" clearable></el-date-picker>
                 </el-form-item>
 
                 <el-form-item label="图片" prop="image">
