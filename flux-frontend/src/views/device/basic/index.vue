@@ -130,7 +130,7 @@
 
     <!-- 添加或修改设备信息对话框 -->
     <el-dialog :title="title" v-model="open" width="800px" append-to-body>
-      <el-form ref="basicRef" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="basicRef" :model="form" :rules="rules" label-width="100px">
 
                 <el-form-item label="使用年限" prop="deviceAge">
                   <el-input v-model="form.deviceAge" placeholder="请输入使用年限" />
