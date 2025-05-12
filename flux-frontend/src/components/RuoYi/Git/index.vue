@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const url = ref('https://github.com/Richard0403')
+const url = ref('https://github.com/')
 
 function goto() {
     window.open(url.value)

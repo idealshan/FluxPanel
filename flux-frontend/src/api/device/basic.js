@@ -1,52 +1,52 @@
 import request from '@/utils/request'
 
 // 查询设备信息列表
-export function listDevice(query) {
+export function listBasic(query) {
   return request({
-    url: '/device_man/device/list',
+    url: '/device/basic/list',
     method: 'get',
     params: query
   })
 }
 
 // 查询设备信息详细
-export function getDevice(id) {
+export function getBasic(id) {
   return request({
-    url: '/device_man/device/getById/' + id,
+    url: '/device/basic/getById/' + id,
     method: 'get'
   })
 }
 
 // 新增设备信息
-export function addDevice(data) {
+export function addBasic(data) {
   return request({
-    url: '/device_man/device/add',
+    url: '/device/basic/add',
     method: 'post',
     data: data
   })
 }
 
 // 修改设备信息
-export function updateDevice(data) {
+export function updateBasic(data) {
   return request({
-    url: '/device_man/device/update',
+    url: '/device/basic/update',
     method: 'put',
     data: data
   })
 }
 
 // 删除设备信息
-export function delDevice(id) {
+export function delBasic(id) {
   return request({
-    url: '/device_man/device/delete/' + id,
+    url: '/device/basic/delete/' + id,
     method: 'delete'
   })
 }
 
 // 导入设备信息
-export function importDevice(data) {
+export function importBasic(data) {
     return request({
-      url: '/device_man/device/import',
+      url: '/device/basic/import',
       method: 'post',
       data: data
     })

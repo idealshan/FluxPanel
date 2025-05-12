@@ -12,7 +12,7 @@ export function addWatermark() {
         (newName) => {
             console.log('userStore.name updated:', newName)
             // You can add logic here to update the watermark dynamically if needed
-            const target_mark = userStore.name ? userStore.name: "Flux Panel"
+            const target_mark = userStore.name ? userStore.name: "益智 Club"
 
             const existing = document.getElementById('my-watermark')
             if (existing) {

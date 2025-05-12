@@ -12,18 +12,12 @@
             </el-form-item>
 
             <el-form-item label="设备类型" prop="deviceType">
-              <el-select
-                  v-model="queryParams.deviceType"
-                  placeholder="请选择设备类型"
-                  style="width: 180px"
-                  clearable>
-                <el-option
-                  v-for="dict in device_type_name"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
+              <el-input
+                v-model="queryParams.deviceType"
+                placeholder="请输入设备类型"
+                clearable
+                @keyup.enter="handleQuery"
+              />
             </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -48,7 +42,7 @@
                       plain
                       icon="Plus"
                       @click="handleAdd"
-                      v-hasPermi="['device_man:device:add']"
+                      v-hasPermi="['device:basic:add']"
                     >新增</el-button>
                     <el-button
                       type="success"
@@ -56,7 +50,7 @@
                       icon="Edit"
                       :disabled="single"
                       @click="handleUpdate"
-                      v-hasPermi="['device_man:device:edit']"
+                      v-hasPermi="['device:basic:edit']"
                     >修改</el-button>
                     <el-button
                       type="danger"
@@ -64,14 +58,14 @@
                       icon="Delete"
                       :disabled="multiple"
                       @click="handleDelete"
-                      v-hasPermi="['device_man:device:remove']"
+                      v-hasPermi="['device:basic:remove']"
                     >删除</el-button>
                   <el-button
                         type="primary"
                         plain
                         icon="Upload"
                         @click="handleImport"
-                        v-hasPermi="['device_man:device:import']"
+                        v-hasPermi="['device:basic:import']"
                         >导入</el-button
                     >
                     <el-button
@@ -79,14 +73,14 @@
                       plain
                       icon="Download"
                       @click="handleExport"
-                      v-hasPermi="['device_man:device:export']"
+                      v-hasPermi="['device:basic:export']"
                     >导出</el-button>
                 </template>
             </TableSetup>
             <auto-table
                 ref="multipleTable"
                 class="mytable"
-                :tableData="deviceList"
+                :tableData="basicList"
                 :columns="columns"
                 :loading="loading"
                 :stripe="stripe"
@@ -94,6 +88,10 @@
                 @onColumnWidthChange="onColumnWidthChange"
                 @onSelectionChange="handleSelectionChange"
             >
+
+
+
+
 
 
 
@@ -110,12 +108,13 @@
 
 
 
+
                     <template #updateTime="{ row }">
                       <span>{{ parseTime(row.updateTime, '{y}-{m}-{d}') }}</span>
                     </template>
                 <template #operate="{ row }">
-                  <el-button link type="primary" icon="Edit" @click="handleUpdate(row)" v-hasPermi="['device_man:device:edit']">修改</el-button>
-                  <el-button link type="primary" icon="Delete" @click="handleDelete(row)" v-hasPermi="['device_man:device:remove']">删除</el-button>
+                  <el-button link type="primary" icon="Edit" @click="handleUpdate(row)" v-hasPermi="['device:basic:edit']">修改</el-button>
+                  <el-button link type="primary" icon="Delete" @click="handleDelete(row)" v-hasPermi="['device:basic:remove']">删除</el-button>
                 </template>
             </auto-table>
             <div class="table-pagination">
@@ -131,32 +130,42 @@
 
     <!-- 添加或修改设备信息对话框 -->
     <el-dialog :title="title" v-model="open" width="800px" append-to-body>
-      <el-form ref="deviceRef" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="basicRef" :model="form" :rules="rules" label-width="100px">
 
                 <el-form-item label="使用年限" prop="deviceAge">
                   <el-input v-model="form.deviceAge" placeholder="请输入使用年限" />
+                </el-form-item>
+
+                <el-form-item label="设备品牌" prop="deviceBrand">
+                  <el-input v-model="form.deviceBrand" placeholder="请输入设备品牌" />
+                </el-form-item>
+
+                <el-form-item label="设备使用部门" prop="deviceDepartment">
+                  <el-input v-model="form.deviceDepartment" placeholder="请输入设备使用部门" />
                 </el-form-item>
 
                 <el-form-item label="设备名称" prop="deviceName">
                   <el-input v-model="form.deviceName" placeholder="请输入设备名称" />
                 </el-form-item>
 
+                <el-form-item label="设备出厂编号" prop="deviceProductionNumber">
+                  <el-input v-model="form.deviceProductionNumber" placeholder="请输入设备出厂编号" />
+                </el-form-item>
+
+                <el-form-item label="设备状态" prop="deviceStatus">
+                  <el-input v-model="form.deviceStatus" placeholder="请输入设备状态" />
+                </el-form-item>
+
                 <el-form-item label="设备类型" prop="deviceType">
-                  <el-select v-model="form.deviceType" placeholder="请选择设备类型">
-                    <el-option
-                      v-for="dict in device_type_name"
-                      :key="dict.value"
-                      :label="dict.label"
-                      :value="dict.label"
-                    ></el-option>
-                  </el-select>
+                  <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+                </el-form-item>
+
+                <el-form-item label="设备使用人" prop="deviceUsername">
+                  <el-input v-model="form.deviceUsername" placeholder="请输入设备使用人" />
                 </el-form-item>
 
                 <el-form-item label="生产日期" prop="deviceYears">
-                  <!-- <el-input v-model="form.deviceYears" placeholder="请输入生产日期" /> -->
-
-                  <el-date-picker v-model="form.deviceYears" format="YYYY-MM-DD" value-format="YYYY-MM-DD"
-                  :style="{width: '100%'}" placeholder="请选择生产日期" clearable></el-date-picker>
+                  <el-input v-model="form.deviceYears" placeholder="请输入生产日期" />
                 </el-form-item>
 
                 <el-form-item label="图片" prop="image">
@@ -183,14 +192,14 @@
     <ImportData
         v-if="openImport"
         v-model="openImport"
-        tableName="device"
+        tableName="device_basic"
         @success="handleImportSuccess"
     />
   </div>
 </template>
 
-<script setup name="Device">
-import { listDevice, getDevice, delDevice, addDevice, updateDevice, importDevice } from "@/api/device_man/device";
+<script setup name="DeviceBasic">
+import { listBasic, getBasic, delBasic, addBasic, updateBasic, importBasic } from "@/api/device/basic";
 import { listAllTable } from '@/api/system/table'
 import TableSetup from '@/components/TableSetup'
 import AutoTable from '@/components/AutoTable'
@@ -198,7 +207,7 @@ import ImportData from '@/components/ImportData'
 const { proxy } = getCurrentInstance();
 const { device_type_name } = proxy.useDict('device_type_name');
 
-const deviceList = ref([]);
+const basicList = ref([]);
 const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
@@ -227,7 +236,7 @@ const data = reactive({
         deviceName: [
           { required: true, message: "设备名称不能为空", trigger: "blur" }
         ],        deviceType: [
-          { required: true, message: "设备类型不能为空", trigger: "change" }
+          { required: true, message: "设备类型不能为空", trigger: "blur" }
         ],  }
 });
 
@@ -236,15 +245,15 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询设备信息列表 */
 function getList() {
   loading.value = true;
-  listDevice(queryParams.value).then(response => {
-    deviceList.value = response.rows;
+  listBasic(queryParams.value).then(response => {
+    basicList.value = response.rows;
     total.value = response.total;
     loading.value = false;
   });
 }
 
 function getColumns() {
-    listAllTable({ tableName: 'device' })
+    listAllTable({ tableName: 'device_basic' })
         .then((response) => {
             columns.value = response.data
         })
@@ -262,8 +271,8 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-        createBy: null,        createTime: null,        delFlag: null,        deptId: null,        deviceAge: null,        deviceName: null,        deviceType: null,        deviceYears: null,        id: null,        image: null,        location: null,        price: null,        updateTime: null  };
-  proxy.resetForm("deviceRef");
+        createBy: null,        createTime: null,        delFlag: null,        deptId: null,        deviceAge: null,        deviceBrand: null,        deviceDepartment: null,        deviceName: null,        deviceProductionNumber: null,        deviceStatus: null,        deviceType: null,        deviceUsername: null,        deviceYears: null,        id: null,        image: null,        location: null,        price: null,        updateTime: null  };
+  proxy.resetForm("basicRef");
 }
 
 /** 搜索按钮操作 */
@@ -300,8 +309,8 @@ function handleImport() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const deviceId = row.id || ids.value
-  getDevice(deviceId).then(response => {
+  const deviceBasicId = row.id || ids.value
+  getBasic(deviceBasicId).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改设备信息";
@@ -310,16 +319,16 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs["deviceRef"].validate(valid => {
+  proxy.$refs["basicRef"].validate(valid => {
     if (valid) {
       if (form.value.id != null) {
-        updateDevice(form.value).then(response => {
+        updateBasic(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
-        addDevice(form.value).then(response => {
+        addBasic(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;
           getList();
@@ -333,7 +342,7 @@ function submitForm() {
 function handleDelete(row) {
   const _ids = row.id || ids.value;
   proxy.$modal.confirm('是否确认删除设备信息编号为"' + _ids + '"的数据项？').then(function() {
-    return delDevice(_ids);
+    return delBasic(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
@@ -343,9 +352,9 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('device_man/device/export', {
+  proxy.download('device/basic/export', {
     ...queryParams.value
-  }, `device_${new Date().getTime()}.xlsx`)
+  }, `basic_${new Date().getTime()}.xlsx`)
 }
 
 //表格全屏
@@ -398,12 +407,12 @@ function updateTableHeight() {
 //导入成功
 function handleImportSuccess(sheetName, filedInfo, fileName) {
     let data = {
-        tableName: 'device',
+        tableName: 'device_basic',
         filedInfo: filedInfo,
         fileName: fileName,
         sheetName: sheetName
     }
-    importDevice(data).then(() => {
+    importBasic(data).then(() => {
         proxy.$modal.msgSuccess('导入成功')
         openImport.value = false
         getList()
