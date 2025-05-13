@@ -1,3 +1,11 @@
+'''
+Author: idealshan idealshan@gmail.com
+Date: 2025-04-27 08:56:29
+LastEditors: idealshan idealshan@gmail.com
+LastEditTime: 2025-05-13 10:35:38
+FilePath: \flux-panel\flux-backend\mcp_server\tool_table.py
+Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+'''
 import json
 
 from fastapi.encoders import jsonable_encoder
@@ -8,13 +16,14 @@ import logging
 
 from module_admin.entity.do.car_driver_do import CarDriver
 from module_admin.entity.do.student_info_do import StudentInfo
-from module_admin.entity.do.device_do import Device
+from module_admin.entity.do.device_basic_do import DeviceBasic
+
 
 class TableTool:
 
     logger = logging.getLogger(__name__)
     # 因为mcp服务是在另外进程里面，需要导入模型，否则Base.registry.mappers是空的
-    support_modules = [CarDriver, StudentInfo, Device]
+    support_modules = [CarDriver, StudentInfo, DeviceBasic]
 
     @classmethod
     async def fetch_table_data(cls, table_name: str) -> str:

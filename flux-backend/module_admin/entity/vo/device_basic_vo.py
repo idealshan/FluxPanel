@@ -24,6 +24,7 @@ class DeviceBasicModel(BaseModel):
     device_type: Optional[str] =  Field(default=None, description='设备类型')
     device_username: Optional[str] =  Field(default=None, description='设备使用人')
     device_years: Optional[str] =  Field(default=None, description='生产日期')
+    device_other: Optional[str] =  Field(default=None, description='其他信息') 
     id: Optional[int] =  Field(default=None, description='id')
     image: Optional[str] =  Field(default=None, description='图片')
     location: Optional[str] =  Field(default=None, description='所在位置')

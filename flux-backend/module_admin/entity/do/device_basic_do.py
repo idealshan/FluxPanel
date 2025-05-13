@@ -1,3 +1,11 @@
+'''
+Author: idealshan idealshan@gmail.com
+Date: 2025-05-06 16:50:15
+LastEditors: idealshan idealshan@gmail.com
+LastEditTime: 2025-05-13 11:14:06
+FilePath: \flux-panel\flux-backend\module_admin\entity\do\device_basic_do.py
+Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+'''
 # -*- coding:utf-8 -*-
 
 from sqlalchemy import Column, ForeignKey, Integer, DateTime, String, Numeric
@@ -24,6 +32,8 @@ class DeviceBasic(Base, BaseMixin):
     device_username = Column(String(255), comment='设备使用人')
 
     device_years = Column(String(255), comment='生产日期')
+
+    device_other = Column(String(65530), comment='其他信息')
 
     image = Column(String(255), comment='图片')
 
