@@ -11,14 +11,27 @@
               />
             </el-form-item>
 
+           
+
             <el-form-item label="设备类型" prop="deviceType">
-              <el-input
-                v-model="queryParams.deviceType"
-                placeholder="请输入设备类型"
-                clearable
-                @keyup.enter="handleQuery"
-              />
+              <el-select
+                  v-model="queryParams.deviceType"
+                  placeholder="请选择设备类型"
+                  style="width: 180px"
+                  clearable>
+                <el-option
+                  v-for="dict in device_type_name"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                />
+              </el-select>
             </el-form-item>
+
+
+
+            
+
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -141,7 +154,14 @@
                 </el-form-item>
 
                 <el-form-item label="设备使用部门" prop="deviceDepartment">
-                  <el-input v-model="form.deviceDepartment" placeholder="请输入设备使用部门" />
+                  <el-select v-model="form.deviceDepartment" placeholder="请选择设备使用部门">
+                    <el-option
+                      v-for="dept in deptList"
+                      :key="dept.deptId"
+                      :label="dept.deptName"
+                      :value="dept.deptName"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
 
                 <el-form-item label="设备名称" prop="deviceName">
@@ -152,12 +172,30 @@
                   <el-input v-model="form.deviceProductionNumber" placeholder="请输入设备出厂编号" />
                 </el-form-item>
 
+               
                 <el-form-item label="设备状态" prop="deviceStatus">
-                  <el-input v-model="form.deviceStatus" placeholder="请输入设备状态" />
+                  <el-select v-model="form.deviceStatus" placeholder="请选择设备状态">
+                    <el-option
+                      v-for="dictdevs in device_status"
+                      :key="dictdevs.value"
+                      :label="dictdevs.label"
+                      :value="dictdevs.label"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
 
+
+
+
                 <el-form-item label="设备类型" prop="deviceType">
-                  <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+                  <el-select v-model="form.deviceType" placeholder="请选择设备类型">
+                    <el-option
+                      v-for="dict in device_type_name"
+                      :key="dict.value"
+                      :label="dict.label"
+                      :value="dict.label"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
 
                 <el-form-item label="设备使用人" prop="deviceUsername">
@@ -165,8 +203,20 @@
                 </el-form-item>
 
                 <el-form-item label="生产日期" prop="deviceYears">
-                  <el-input v-model="form.deviceYears" placeholder="请输入生产日期" />
+                  <el-date-picker
+                  clearable
+                  v-model="form.deviceYears"
+                  type="date"
+                  value-format="YYYY-MM-DD"
+                  placeholder="请输入生产日期" />
                 </el-form-item>
+
+
+                
+
+
+
+
 
                 <el-form-item label="图片" prop="image">
                   <el-input v-model="form.image" placeholder="请输入图片" />
@@ -178,6 +228,10 @@
 
                 <el-form-item label="价格" prop="price">
                   <el-input v-model="form.price" placeholder="请输入价格" />
+                </el-form-item>
+
+                <el-form-item label="其他信息" prop="deviceOther">
+                  <el-input v-model="form.deviceOther" placeholder="请输入其他信息" />
                 </el-form-item>
 
       </el-form>
@@ -200,14 +254,17 @@
 
 <script setup name="DeviceBasic">
 import { listBasic, getBasic, delBasic, addBasic, updateBasic, importBasic } from "@/api/device/basic";
+import { listDept } from "@/api/system/dept";
 import { listAllTable } from '@/api/system/table'
 import TableSetup from '@/components/TableSetup'
 import AutoTable from '@/components/AutoTable'
 import ImportData from '@/components/ImportData'
 const { proxy } = getCurrentInstance();
 const { device_type_name } = proxy.useDict('device_type_name');
+const { device_status } = proxy.useDict('device_status');
 
 const basicList = ref([]);
+const deptList = ref([]); // 添加 deptList 声明
 const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
@@ -271,8 +328,16 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-        createBy: null,        createTime: null,        delFlag: null,        deptId: null,        deviceAge: null,        deviceBrand: null,        deviceDepartment: null,        deviceName: null,        deviceProductionNumber: null,        deviceStatus: null,        deviceType: null,        deviceUsername: null,        deviceYears: null,        id: null,        image: null,        location: null,        price: null,        updateTime: null  };
+        createBy: null,        createTime: null,        delFlag: null,        deptId: null,        deviceAge: null,        deviceBrand: null,        deviceDepartment: null, // 修改这里，确保重置时为 null
+        deviceName: null,        deviceProductionNumber: null,        deviceStatus: null,        deviceType: null,        deviceUsername: null,        deviceYears: null,        id: null,        image: null,        location: null,        price: null,        updateTime: null, deviceOther: null  };
   proxy.resetForm("basicRef");
+}
+
+/** 查询部门列表 */
+function getDeptList() {
+  listDept().then(response => {
+    deptList.value = response.data;
+  });
 }
 
 /** 搜索按钮操作 */
@@ -297,6 +362,7 @@ function handleSelectionChange(selection) {
 /** 新增按钮操作 */
 function handleAdd() {
   reset();
+  getDeptList();
   open.value = true;
   title.value = "添加设备信息";
 }
@@ -309,6 +375,7 @@ function handleImport() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
+  getDeptList();
   const deviceBasicId = row.id || ids.value
   getBasic(deviceBasicId).then(response => {
     form.value = response.data;
